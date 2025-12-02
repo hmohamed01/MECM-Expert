@@ -2,6 +2,8 @@
 
 A Claude Code skill that provides comprehensive Microsoft Endpoint Configuration Manager (MECM/ConfigMgr/SCCM) administration expertise.
 
+> **Note:** This skill works with both **Claude Code CLI** and **claude.ai**. For claude.ai, simply zip this repository and upload it to a conversation as a project file to use the MECM expertise in the web interface.
+
 ## What is this?
 
 This is a [Claude Code skill](https://docs.anthropic.com/en/docs/claude-code) that enhances Claude's ability to assist with enterprise MECM administration tasks. When installed, Claude gains deep knowledge of ConfigMgr concepts, PowerShell automation, and troubleshooting procedures.
