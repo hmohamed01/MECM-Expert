@@ -22,11 +22,13 @@ This is a [Claude Code skill](https://docs.anthropic.com/en/docs/claude-code) th
 
 Copy the `SKILL.md` file to your Claude Code skills directory:
 
+**macOS/Linux:**
 ```bash
-# macOS/Linux
 cp SKILL.md ~/.claude/skills/mecm-expert/SKILL.md
+```
 
-# Windows
+**Windows:**
+```cmd
 copy SKILL.md %USERPROFILE%\.claude\skills\mecm-expert\SKILL.md
 ```
 
