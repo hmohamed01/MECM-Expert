@@ -16,7 +16,7 @@ This is a [Claude Code skill](https://docs.anthropic.com/en/docs/claude-code) th
 - **Collection Management** - WQL queries, membership rules, evaluation optimization
 - **PowerShell Automation** - ConfigurationManager module, bulk operations, scripting
 - **Client Troubleshooting** - Log analysis, health checks, common issue resolution
-- **Reporting** - SQL views, CMPivot, compliance reports
+- **Reporting & SQL Views** - Comprehensive SQL Server views reference (20+ view categories), CMPivot, custom SSRS reports, compliance reporting
 
 ## Installation
 
@@ -40,6 +40,17 @@ Once installed, Claude Code will automatically use this skill when you ask about
 - "What's the best way to troubleshoot a failing task sequence?"
 - "Create an ADR for monthly security updates"
 - "Why is my ConfigMgr client not reporting?"
+- "Write a SQL query to show software update compliance by collection"
+- "Which SQL views should I use to build a hardware inventory report?"
+
+## Documentation References
+
+This skill includes references to official Microsoft documentation:
+
+- [Configuration Manager Documentation](https://learn.microsoft.com/en-us/intune/configmgr/)
+- [SQL Server Views Reference](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/sql-server-views-configuration-manager) - 20+ view categories with sample queries
+- [PowerShell Reference](https://learn.microsoft.com/en-us/powershell/sccm/overview)
+- [Troubleshooting Guide](https://learn.microsoft.com/en-us/troubleshoot/mem/configmgr/welcome-configuration-manager)
 
 ## Requirements
 

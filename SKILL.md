@@ -436,7 +436,59 @@ Create custom reports using:
 - CMPivot for real-time queries
 - Power BI integration
 
-### Useful SQL Views
+### SQL Server Views Reference
+
+**Official SQL Views Documentation**: https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/sql-server-views-configuration-manager
+
+Configuration Manager SQL Server views are essential for creating custom reports and querying site data. The views provide a faster path to data than using WMI/WQL directly.
+
+#### SQL View Categories
+
+| Category | Documentation URL | Purpose |
+|----------|-------------------|---------|
+| Schema Views | [schema-views-configuration-manager](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/schema-views-configuration-manager) | View schema information and metadata |
+| Discovery Views | [discovery-views-configuration-manager](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/discovery-views-configuration-manager) | System, user, and group resources discovered on the network |
+| Inventory Views | [inventory-views-configuration-manager](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/inventory-views-configuration-manager) | General inventory information |
+| Hardware Inventory Views | [hardware-inventory-views-configuration-manager](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/hardware-inventory-views-configuration-manager) | Hardware inventory data (v_GS_* views) |
+| Software Inventory Views | [software-inventory-views-configuration-manager](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/software-inventory-views-configuration-manager) | Software inventory and file collection |
+| Collection Views | [collection-views-configuration-manager](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/collection-views-configuration-manager) | Collections, membership rules, and members |
+| Application Management Views | [application-management-views-configuration-manager](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/application-management-views-configuration-manager) | Applications, packages, programs, deployments |
+| Software Updates Views | [software-updates-views-configuration-manager](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/software-updates-views-configuration-manager) | Software updates metadata, groups, compliance |
+| Software Metering Views | [software-metering-views-configuration-manager](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/software-metering-views-configuration-manager) | Software usage metering rules and data |
+| Content Management Views | [content-management-views-configuration-manager](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/content-management-views-configuration-manager) | Content distribution and distribution points |
+| Compliance Settings Views | [compliance-settings-views-configuration-manager](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/compliance-settings-views-configuration-manager) | Configuration items, baselines, compliance |
+| Operating System Deployment Views | [operating-system-deployment-views-configuration-manager](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/operating-system-deployment-views-configuration-manager) | Boot images, OS images, task sequences |
+| Endpoint Protection Views | [endpoint-protection-views-configuration-manager](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/endpoint-protection-views-configuration-manager) | Antimalware status, malware activity |
+| Client Status Views | [client-status-views-configuration-manager](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/client-status-views-configuration-manager) | Client health and deployment status |
+| Status and Alert Views | [status-alert-views-configuration-manager](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/status-alert-views-configuration-manager) | Component, site, and site system status |
+| Site Administration Views | [site-admin-views-configuration-manager](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/site-admin-views-configuration-manager) | Site configuration, boundaries, site systems |
+| Security Views | [security-views-configuration-manager](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/security-views-configuration-manager) | User permissions and role-based access |
+| Query Views | [query-views-configuration-manager](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/query-views-configuration-manager) | Saved queries in the hierarchy |
+| Mobile Device Management Views | [mobile-device-management-views-configuration-manager](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/mobile-device-management-views-configuration-manager) | Mobile device configuration and inventory |
+| Wake On LAN Views | [wake-lan-views-configuration-manager](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/wake-lan-views-configuration-manager) | Wake On LAN enabled objects and clients |
+
+#### Sample Queries by Category
+
+Microsoft provides sample SQL queries for each view category:
+- [Sample queries for discovery](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/sample-queries-discovery-configuration-manager)
+- [Sample queries for hardware inventory](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/sample-queries-hardware-inventory-configuration-manager)
+- [Sample queries for software inventory](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/sample-queries-software-inventory-configuration-manager)
+- [Sample queries for software updates](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/sample-queries-software-updates-configuration-manager)
+- [Sample queries for software metering](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/sample-queries-software-metering-configuration-manager)
+- [Sample queries for compliance settings](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/sample-queries-compliance-settings-configuration-manager)
+- [Sample queries for operating system deployment](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/sample-queries-operating-system-deployment-configuration-manager)
+- [Sample queries for endpoint protection](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/sample-queries-endpoint-protection-configuration-manager)
+- [Sample queries for client status](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/sample-queries-client-status-configuration-manager)
+- [Sample queries for status and alerts](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/sample-queries-status-alerts-configuration-manager)
+- [Sample queries for asset intelligence](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/sample-queries-asset-intelligence-configuration-manager)
+- [Sample queries for Wake On LAN](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/sample-queries-wake-lan-views-configuration-manager)
+
+#### Creating Custom Reports
+
+For guidance on building custom SSRS reports using SQL views:
+- [Create custom reports by using SQL Server views](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/create-custom-reports-using-sql-server-views)
+
+#### Common SQL Views Quick Reference
 
 | View | Purpose |
 |------|---------|
@@ -445,6 +497,11 @@ Create custom reports using:
 | v_GS_OPERATING_SYSTEM | OS information |
 | v_UpdateComplianceStatus | Update compliance |
 | v_Collection | Collection information |
+| v_FullCollectionMembership | Collection membership |
+| v_ConfigurationItems | Configuration items |
+| v_CITypes | Configuration item types |
+| v_ComponentSummarizer | Component status summary |
+| v_SiteSummary | Site status summary |
 
 ## Best Practices Summary
 
