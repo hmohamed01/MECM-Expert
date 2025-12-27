@@ -24,12 +24,18 @@ Copy the `SKILL.md` file to your Claude Code skills directory:
 
 **macOS/Linux:**
 ```bash
+mkdir -p ~/.claude/skills/mecm-expert
+```
+```bash
 cp SKILL.md ~/.claude/skills/mecm-expert/SKILL.md
 ```
 
-**Windows:**
-```cmd
-copy SKILL.md %USERPROFILE%\.claude\skills\mecm-expert\SKILL.md
+**Windows (PowerShell):**
+```powershell
+New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.claude\skills\mecm-expert"
+```
+```powershell
+Copy-Item SKILL.md "$env:USERPROFILE\.claude\skills\mecm-expert\SKILL.md"
 ```
 
 ## Usage
