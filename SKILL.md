@@ -9,19 +9,25 @@ This skill provides guidance for Microsoft Endpoint Configuration Manager (MECM)
 
 ## Primary Documentation Reference
 
-**Official Documentation**: https://learn.microsoft.com/en-us/intune/configmgr/
+**Official Documentation**: https://learn.microsoft.com/en-us/mem/configmgr/
 
 Always reference official Microsoft documentation for the most current and accurate information. Key documentation areas:
-- Core Infrastructure: `/core/`
-- Software Updates: `/sum/`
-- Application Management: `/apps/`
-- OS Deployment: `/osd/`
-- PowerShell Reference: `/powershell/module/configurationmanager/`
-- Troubleshooting: `/troubleshoot/mem/configmgr/`
+
+| Area | Documentation URL |
+|------|-------------------|
+| Core Infrastructure | [Core docs](https://learn.microsoft.com/en-us/mem/configmgr/core/) |
+| Software Updates | [SUM docs](https://learn.microsoft.com/en-us/mem/configmgr/sum/) |
+| Application Management | [Apps docs](https://learn.microsoft.com/en-us/mem/configmgr/apps/) |
+| OS Deployment | [OSD docs](https://learn.microsoft.com/en-us/mem/configmgr/osd/) |
+| PowerShell Reference | [PowerShell cmdlets](https://learn.microsoft.com/en-us/powershell/module/configurationmanager/) |
+| Troubleshooting | [Troubleshoot docs](https://learn.microsoft.com/en-us/troubleshoot/mem/configmgr/) |
+| What's New | [What's new](https://learn.microsoft.com/en-us/mem/configmgr/core/plan-design/changes/whats-new-incremental-versions) |
 
 ## Core Concepts
 
 ### Configuration Manager Hierarchy
+
+**Reference**: [Design a hierarchy of sites](https://learn.microsoft.com/en-us/mem/configmgr/core/plan-design/hierarchy/design-a-hierarchy-of-sites)
 
 ConfigMgr uses a hierarchical site structure:
 - **Central Administration Site (CAS)**: Top-level site for multi-site hierarchies (optional)
@@ -30,23 +36,31 @@ ConfigMgr uses a hierarchical site structure:
 
 ### Key Site System Roles
 
-- **Management Point (MP)**: Primary communication between clients and site
-- **Distribution Point (DP)**: Content storage and distribution
-- **Software Update Point (SUP)**: Integrates with WSUS for patch management
-- **State Migration Point**: Stores user state during OSD
-- **Reporting Services Point**: SQL Server Reporting Services integration
+**Reference**: [Site system roles](https://learn.microsoft.com/en-us/mem/configmgr/core/plan-design/hierarchy/plan-for-site-system-servers-and-site-system-roles)
+
+- **Management Point (MP)**: Primary communication between clients and site - [Plan for management points](https://learn.microsoft.com/en-us/mem/configmgr/core/plan-design/hierarchy/plan-for-the-management-point)
+- **Distribution Point (DP)**: Content storage and distribution - [Install and configure distribution points](https://learn.microsoft.com/en-us/mem/configmgr/core/servers/deploy/configure/install-and-configure-distribution-points)
+- **Software Update Point (SUP)**: Integrates with WSUS for patch management - [Plan for software updates](https://learn.microsoft.com/en-us/mem/configmgr/sum/plan-design/plan-for-software-updates)
+- **State Migration Point**: Stores user state during OSD - [State migration point](https://learn.microsoft.com/en-us/mem/configmgr/osd/get-started/prepare-site-system-roles-for-operating-system-deployments#state-migration-point)
+- **Reporting Services Point**: SQL Server Reporting Services integration - [Configure reporting](https://learn.microsoft.com/en-us/mem/configmgr/core/servers/manage/configuring-reporting)
 
 ## Software Update Management
 
+**Reference**: [Software updates overview](https://learn.microsoft.com/en-us/mem/configmgr/sum/understand/software-updates-introduction)
+
 ### Software Update Point Configuration
+
+**Reference**: [Install and configure a software update point](https://learn.microsoft.com/en-us/mem/configmgr/sum/get-started/install-a-software-update-point)
 
 Install SUP on a server with WSUS. Key configuration steps:
 1. Add Software Update Point role to site system
 2. Configure WSUS port settings (default: 8530/8531 for SSL)
-3. Configure products and classifications to synchronize
-4. Set synchronization schedule
+3. Configure products and classifications to synchronize - [Configure classifications and products](https://learn.microsoft.com/en-us/mem/configmgr/sum/get-started/configure-classifications-and-products)
+4. Set synchronization schedule - [Synchronize software updates](https://learn.microsoft.com/en-us/mem/configmgr/sum/get-started/synchronize-software-updates)
 
 ### Automatic Deployment Rules (ADR)
+
+**Reference**: [Automatically deploy software updates](https://learn.microsoft.com/en-us/mem/configmgr/sum/deploy-use/automatically-deploy-software-updates)
 
 ADRs automate monthly patching (Patch Tuesday):
 
@@ -67,13 +81,17 @@ New-CMSoftwareUpdateAutoDeploymentRule `
 
 ### WSUS Maintenance
 
+**Reference**: [Software updates maintenance](https://learn.microsoft.com/en-us/mem/configmgr/sum/deploy-use/software-updates-maintenance)
+
 Critical for ConfigMgr health (v1906+):
 - Enable "Decline expired updates in WSUS according to supersedence rules"
 - Enable "Add non-clustered indexes to WSUS database"
 - Run WSUS cleanup wizard regularly
-- Reindex SUSDB monthly
+- Reindex SUSDB monthly - [Complete guide to WSUS maintenance](https://learn.microsoft.com/en-us/troubleshoot/mem/configmgr/update-management/wsus-maintenance-guide)
 
 ### Key Software Update Logs
+
+**Reference**: [Log files for software updates](https://learn.microsoft.com/en-us/mem/configmgr/core/plan-design/hierarchy/log-files#software-update-point-site-system-role)
 
 | Log File | Location | Purpose |
 |----------|----------|---------|
@@ -85,16 +103,22 @@ Critical for ConfigMgr health (v1906+):
 
 ## Application Management
 
+**Reference**: [Application management overview](https://learn.microsoft.com/en-us/mem/configmgr/apps/understand/introduction-to-application-management)
+
 ### Application Model
+
+**Reference**: [Create applications](https://learn.microsoft.com/en-us/mem/configmgr/apps/deploy-use/create-applications)
 
 Applications consist of:
 - **Application**: High-level metadata container
-- **Deployment Types**: Installation methods (MSI, Script, App-V, etc.)
-- **Detection Methods**: Determine if app is installed
-- **Requirements**: Conditions for deployment type applicability
-- **Dependencies**: Other apps required before installation
+- **Deployment Types**: Installation methods (MSI, Script, App-V, etc.) - [Create deployment types](https://learn.microsoft.com/en-us/mem/configmgr/apps/deploy-use/create-applications#bkmk_create-dt)
+- **Detection Methods**: Determine if app is installed - [Detection methods](https://learn.microsoft.com/en-us/mem/configmgr/apps/deploy-use/create-applications#bkmk_dt-detect)
+- **Requirements**: Conditions for deployment type applicability - [Deployment type requirements](https://learn.microsoft.com/en-us/mem/configmgr/apps/deploy-use/create-applications#bkmk_dt-require)
+- **Dependencies**: Other apps required before installation - [Deployment type dependencies](https://learn.microsoft.com/en-us/mem/configmgr/apps/deploy-use/create-applications#bkmk_dt-depend)
 
 ### Detection Methods
+
+**Reference**: [Detection method options](https://learn.microsoft.com/en-us/mem/configmgr/apps/deploy-use/create-applications#bkmk_dt-detect)
 
 Configure detection rules to verify installation:
 
@@ -127,13 +151,17 @@ if ($app) { Write-Output "Installed" }
 
 ### Deployment Best Practices
 
+**Reference**: [Deploy applications](https://learn.microsoft.com/en-us/mem/configmgr/apps/deploy-use/deploy-applications)
+
 - Use **Required** for mandatory installations
 - Use **Available** for user-initiated installs via Software Center
-- Configure maintenance windows for required deployments
-- Use supersedence for application updates
-- Test with simulated deployments first
+- Configure maintenance windows for required deployments - [Maintenance windows](https://learn.microsoft.com/en-us/mem/configmgr/core/clients/manage/collections/use-maintenance-windows)
+- Use supersedence for application updates - [Supersede applications](https://learn.microsoft.com/en-us/mem/configmgr/apps/deploy-use/revise-and-supersede-applications#supersedence)
+- Test with simulated deployments first - [Simulate deployments](https://learn.microsoft.com/en-us/mem/configmgr/apps/deploy-use/simulate-application-deployments)
 
 ### Key Application Logs
+
+**Reference**: [Log files for application management](https://learn.microsoft.com/en-us/mem/configmgr/core/plan-design/hierarchy/log-files#application-management)
 
 | Log File | Location | Purpose |
 |----------|----------|---------|
@@ -145,15 +173,21 @@ if ($app) { Write-Output "Installed" }
 
 ## Operating System Deployment (OSD)
 
+**Reference**: [OS deployment overview](https://learn.microsoft.com/en-us/mem/configmgr/osd/understand/introduction-to-operating-system-deployment)
+
 ### Task Sequence Components
 
+**Reference**: [Infrastructure requirements for OSD](https://learn.microsoft.com/en-us/mem/configmgr/osd/plan-design/infrastructure-requirements-for-operating-system-deployment)
+
 Task sequences automate OS deployment:
-- **Boot Images**: Windows PE for pre-OS environment
-- **OS Images**: Captured or stock WIM files
-- **Driver Packages**: Device drivers for hardware
+- **Boot Images**: Windows PE for pre-OS environment - [Manage boot images](https://learn.microsoft.com/en-us/mem/configmgr/osd/get-started/manage-boot-images)
+- **OS Images**: Captured or stock WIM files - [Manage OS images](https://learn.microsoft.com/en-us/mem/configmgr/osd/get-started/manage-operating-system-images)
+- **Driver Packages**: Device drivers for hardware - [Manage drivers](https://learn.microsoft.com/en-us/mem/configmgr/osd/get-started/manage-drivers)
 - **Packages**: Supporting files (scripts, tools)
 
 ### Common Task Sequence Steps
+
+**Reference**: [Task sequence steps](https://learn.microsoft.com/en-us/mem/configmgr/osd/understand/task-sequence-steps)
 
 1. **Restart in Windows PE**: Boot to WinPE
 2. **Partition Disk**: UEFI or BIOS partitioning
@@ -165,6 +199,8 @@ Task sequences automate OS deployment:
 8. **Install Software Updates**: Apply patches
 
 ### Task Sequence Variables
+
+**Reference**: [Task sequence variables](https://learn.microsoft.com/en-us/mem/configmgr/osd/understand/task-sequence-variables)
 
 Set variables to control task sequence behavior:
 
@@ -182,6 +218,8 @@ Common variables:
 
 ### Key OSD Logs
 
+**Reference**: [Log files for OSD](https://learn.microsoft.com/en-us/mem/configmgr/core/plan-design/hierarchy/log-files#operating-system-deployment)
+
 | Log File | Location | Purpose |
 |----------|----------|---------|
 | SMSTS.log | %TEMP% or C:\Windows\CCM\Logs | Main task sequence log |
@@ -190,6 +228,8 @@ Common variables:
 
 ## Collection Management
 
+**Reference**: [Collections overview](https://learn.microsoft.com/en-us/mem/configmgr/core/clients/manage/collections/introduction-to-collections)
+
 ### Collection Types
 
 - **Device Collections**: Target computers/devices
@@ -197,12 +237,16 @@ Common variables:
 
 ### Membership Rules
 
+**Reference**: [Create collections](https://learn.microsoft.com/en-us/mem/configmgr/core/clients/manage/collections/create-collections)
+
 **Direct Rule**: Manually add specific resources
-**Query Rule**: Dynamic membership via WQL
+**Query Rule**: Dynamic membership via WQL - [How to create queries](https://learn.microsoft.com/en-us/mem/configmgr/core/servers/manage/create-queries)
 **Include Rule**: Include members from another collection
 **Exclude Rule**: Exclude members from another collection
 
 ### Common WQL Queries
+
+**Reference**: [WQL (WMI Query Language)](https://learn.microsoft.com/en-us/mem/configmgr/core/servers/manage/queries-technical-reference)
 
 **All Windows 10/11 Workstations**:
 ```sql
@@ -239,14 +283,20 @@ WHERE SMS_R_System.SystemOUName = "DOMAIN.COM/OU/SUBOU"
 
 ### Collection Evaluation
 
+**Reference**: [Collection evaluation](https://learn.microsoft.com/en-us/mem/configmgr/core/clients/manage/collections/collection-evaluation)
+
 - **Full Update**: Complete re-evaluation of all rules
-- **Incremental Update**: Delta changes only (enable cautiously)
+- **Incremental Update**: Delta changes only (enable cautiously) - [Best practices for collections](https://learn.microsoft.com/en-us/mem/configmgr/core/clients/manage/collections/best-practices-for-collections)
 - Configure evaluation schedules to avoid performance impact
 - Monitor collection evaluation with colleval.log
 
 ## PowerShell Administration
 
+**Reference**: [ConfigurationManager PowerShell module](https://learn.microsoft.com/en-us/powershell/sccm/overview)
+
 ### Module Setup
+
+**Reference**: [Get started with Configuration Manager cmdlets](https://learn.microsoft.com/en-us/powershell/sccm/overview#get-started)
 
 Use this fault-tolerant loader script to import the ConfigurationManager module:
 
@@ -291,12 +341,14 @@ Set-Location "$($SiteCode):\"
 
 ### Common PowerShell Operations
 
-**Get Site Information**:
+**Reference**: [Configuration Manager cmdlets](https://learn.microsoft.com/en-us/powershell/module/configurationmanager/)
+
+**Get Site Information** - [Get-CMSite](https://learn.microsoft.com/en-us/powershell/module/configurationmanager/get-cmsite):
 ```powershell
 Get-CMSite
 ```
 
-**Manage Collections**:
+**Manage Collections** - [New-CMDeviceCollection](https://learn.microsoft.com/en-us/powershell/module/configurationmanager/new-cmdevicecollection):
 ```powershell
 # Create device collection
 New-CMDeviceCollection -Name "Test Collection" -LimitingCollectionName "All Systems"
@@ -307,7 +359,7 @@ Add-CMDeviceCollectionQueryMembershipRule -CollectionName "Test Collection" `
     -RuleName "PCs"
 ```
 
-**Manage Applications**:
+**Manage Applications** - [Get-CMApplication](https://learn.microsoft.com/en-us/powershell/module/configurationmanager/get-cmapplication), [New-CMApplicationDeployment](https://learn.microsoft.com/en-us/powershell/module/configurationmanager/new-cmapplicationdeployment):
 ```powershell
 # Get application
 Get-CMApplication -Name "Application Name"
@@ -319,7 +371,7 @@ New-CMApplicationDeployment -Name "Application Name" `
     -DeployPurpose Required
 ```
 
-**Manage Software Updates**:
+**Manage Software Updates** - [Get-CMSoftwareUpdateGroup](https://learn.microsoft.com/en-us/powershell/module/configurationmanager/get-cmsoftwareupdategroup), [New-CMSoftwareUpdateDeployment](https://learn.microsoft.com/en-us/powershell/module/configurationmanager/new-cmsoftwareupdatedeployment):
 ```powershell
 # Get software update groups
 Get-CMSoftwareUpdateGroup
@@ -330,7 +382,7 @@ New-CMSoftwareUpdateDeployment -SoftwareUpdateGroupName "2024-01 Security Update
     -DeploymentType Required
 ```
 
-**Manage Task Sequences**:
+**Manage Task Sequences** - [Get-CMTaskSequence](https://learn.microsoft.com/en-us/powershell/module/configurationmanager/get-cmtasksequence):
 ```powershell
 # Get task sequence
 $ts = Get-CMTaskSequence -Name "Deploy Windows 11"
@@ -343,7 +395,11 @@ Add-CMTaskSequenceStep -TaskSequence $ts -Step $step
 
 ## Client Troubleshooting
 
+**Reference**: [Client troubleshooting overview](https://learn.microsoft.com/en-us/troubleshoot/mem/configmgr/client-management/client-management-overview)
+
 ### Client Health Checks
+
+**Reference**: [Client health](https://learn.microsoft.com/en-us/mem/configmgr/core/clients/manage/monitor-clients#client-health)
 
 ConfigMgr client performs automatic health checks:
 - Client installation verification
@@ -354,6 +410,8 @@ ConfigMgr client performs automatic health checks:
 Location: `C:\Windows\CCM\CcmEval.xml`
 
 ### Key Client Logs
+
+**Reference**: [Log files reference - Client](https://learn.microsoft.com/en-us/mem/configmgr/core/plan-design/hierarchy/log-files#client-logs)
 
 | Log File | Purpose |
 |----------|---------|
@@ -367,25 +425,29 @@ Location: `C:\Windows\CCM\CcmEval.xml`
 
 ### Common Issues and Resolution
 
-**Client Not Reporting**:
+**Reference**: [Client troubleshooting guidance](https://learn.microsoft.com/en-us/troubleshoot/mem/configmgr/client-management/client-management-overview)
+
+**Client Not Reporting** - [Troubleshoot client installation](https://learn.microsoft.com/en-us/troubleshoot/mem/configmgr/client-installation/troubleshoot-client-install):
 1. Verify CcmExec service is running
 2. Check ClientIDManagerStartup.log for registration errors
 3. Verify network connectivity to MP
 4. Check certificates if using HTTPS
 
-**Content Download Failures**:
+**Content Download Failures** - [Troubleshoot content download](https://learn.microsoft.com/en-us/troubleshoot/mem/configmgr/content-management/troubleshoot-content-download):
 1. Check CAS.log and ContentTransferManager.log
 2. Verify DP availability
-3. Check boundary configuration
+3. Check boundary configuration - [Configure boundaries](https://learn.microsoft.com/en-us/mem/configmgr/core/servers/deploy/configure/define-site-boundaries-and-boundary-groups)
 4. Verify client cache size
 
-**Policy Not Updating**:
+**Policy Not Updating** - [Troubleshoot policy processing](https://learn.microsoft.com/en-us/troubleshoot/mem/configmgr/client-management/client-policy-processing-overview):
 1. Run Machine Policy Retrieval cycle
 2. Check PolicyAgent.log
 3. Verify MP health
 4. Check client assignment
 
 ### Client Actions
+
+**Reference**: [Client notification](https://learn.microsoft.com/en-us/mem/configmgr/core/clients/manage/client-notification)
 
 Trigger client actions via PowerShell:
 ```powershell
@@ -401,13 +463,17 @@ Invoke-WMIMethod -Namespace root\ccm -Class SMS_Client -Name TriggerSchedule "{0
 
 ## Driver Management
 
+**Reference**: [Manage drivers in Configuration Manager](https://learn.microsoft.com/en-us/mem/configmgr/osd/get-started/manage-drivers)
+
 ### Driver Deployment Methods
 
-1. **Driver Packages**: Traditional method, all drivers in one package
-2. **Driver Catalog**: Individual driver management
-3. **Auto Apply Drivers**: Dynamic selection during OSD
+1. **Driver Packages**: Traditional method, all drivers in one package - [Manage driver packages](https://learn.microsoft.com/en-us/mem/configmgr/osd/get-started/manage-drivers#driver-packages)
+2. **Driver Catalog**: Individual driver management - [Import drivers](https://learn.microsoft.com/en-us/mem/configmgr/osd/get-started/manage-drivers#import-device-drivers)
+3. **Auto Apply Drivers**: Dynamic selection during OSD - [Auto Apply Drivers step](https://learn.microsoft.com/en-us/mem/configmgr/osd/understand/task-sequence-steps#BKMK_AutoApplyDrivers)
 
 ### Surface Driver Updates
+
+**Reference**: [Manage Surface drivers](https://learn.microsoft.com/en-us/mem/configmgr/sum/deploy-use/surface-drivers)
 
 Enable Surface driver synchronization (v1706+):
 1. Navigate to Administration > Site Configuration > Sites
@@ -420,7 +486,11 @@ Requirements:
 
 ## Reporting
 
+**Reference**: [Introduction to reporting](https://learn.microsoft.com/en-us/mem/configmgr/core/servers/manage/introduction-to-reporting)
+
 ### Built-in Reports
+
+**Reference**: [List of reports](https://learn.microsoft.com/en-us/mem/configmgr/core/servers/manage/list-of-reports)
 
 ConfigMgr includes 400+ built-in SSRS reports:
 - Hardware inventory
@@ -432,13 +502,13 @@ ConfigMgr includes 400+ built-in SSRS reports:
 ### Custom Reports
 
 Create custom reports using:
-- SQL Server Reporting Services
-- CMPivot for real-time queries
-- Power BI integration
+- SQL Server Reporting Services - [Creating custom report models](https://learn.microsoft.com/en-us/mem/configmgr/core/servers/manage/creating-custom-report-models-in-sql-server-reporting-services)
+- CMPivot for real-time queries - [CMPivot overview](https://learn.microsoft.com/en-us/mem/configmgr/core/servers/manage/cmpivot-overview)
+- Power BI integration - [Power BI sample reports](https://learn.microsoft.com/en-us/mem/configmgr/core/servers/manage/powerbi-sample-reports)
 
 ### SQL Server Views Reference
 
-**Official SQL Views Documentation**: https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/sql-server-views-configuration-manager
+**Official SQL Views Documentation**: https://learn.microsoft.com/en-us/mem/configmgr/develop/core/understand/sqlviews/sql-server-views-configuration-manager
 
 Configuration Manager SQL Server views are essential for creating custom reports and querying site data. The views provide a faster path to data than using WMI/WQL directly.
 
@@ -446,47 +516,47 @@ Configuration Manager SQL Server views are essential for creating custom reports
 
 | Category | Documentation URL | Purpose |
 |----------|-------------------|---------|
-| Schema Views | [schema-views-configuration-manager](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/schema-views-configuration-manager) | View schema information and metadata |
-| Discovery Views | [discovery-views-configuration-manager](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/discovery-views-configuration-manager) | System, user, and group resources discovered on the network |
-| Inventory Views | [inventory-views-configuration-manager](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/inventory-views-configuration-manager) | General inventory information |
-| Hardware Inventory Views | [hardware-inventory-views-configuration-manager](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/hardware-inventory-views-configuration-manager) | Hardware inventory data (v_GS_* views) |
-| Software Inventory Views | [software-inventory-views-configuration-manager](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/software-inventory-views-configuration-manager) | Software inventory and file collection |
-| Collection Views | [collection-views-configuration-manager](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/collection-views-configuration-manager) | Collections, membership rules, and members |
-| Application Management Views | [application-management-views-configuration-manager](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/application-management-views-configuration-manager) | Applications, packages, programs, deployments |
-| Software Updates Views | [software-updates-views-configuration-manager](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/software-updates-views-configuration-manager) | Software updates metadata, groups, compliance |
-| Software Metering Views | [software-metering-views-configuration-manager](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/software-metering-views-configuration-manager) | Software usage metering rules and data |
-| Content Management Views | [content-management-views-configuration-manager](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/content-management-views-configuration-manager) | Content distribution and distribution points |
-| Compliance Settings Views | [compliance-settings-views-configuration-manager](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/compliance-settings-views-configuration-manager) | Configuration items, baselines, compliance |
-| Operating System Deployment Views | [operating-system-deployment-views-configuration-manager](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/operating-system-deployment-views-configuration-manager) | Boot images, OS images, task sequences |
-| Endpoint Protection Views | [endpoint-protection-views-configuration-manager](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/endpoint-protection-views-configuration-manager) | Antimalware status, malware activity |
-| Client Status Views | [client-status-views-configuration-manager](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/client-status-views-configuration-manager) | Client health and deployment status |
-| Status and Alert Views | [status-alert-views-configuration-manager](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/status-alert-views-configuration-manager) | Component, site, and site system status |
-| Site Administration Views | [site-admin-views-configuration-manager](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/site-admin-views-configuration-manager) | Site configuration, boundaries, site systems |
-| Security Views | [security-views-configuration-manager](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/security-views-configuration-manager) | User permissions and role-based access |
-| Query Views | [query-views-configuration-manager](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/query-views-configuration-manager) | Saved queries in the hierarchy |
-| Mobile Device Management Views | [mobile-device-management-views-configuration-manager](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/mobile-device-management-views-configuration-manager) | Mobile device configuration and inventory |
-| Wake On LAN Views | [wake-lan-views-configuration-manager](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/wake-lan-views-configuration-manager) | Wake On LAN enabled objects and clients |
+| Schema Views | [schema-views-configuration-manager](https://learn.microsoft.com/en-us/mem/configmgr/develop/core/understand/sqlviews/schema-views-configuration-manager) | View schema information and metadata |
+| Discovery Views | [discovery-views-configuration-manager](https://learn.microsoft.com/en-us/mem/configmgr/develop/core/understand/sqlviews/discovery-views-configuration-manager) | System, user, and group resources discovered on the network |
+| Inventory Views | [inventory-views-configuration-manager](https://learn.microsoft.com/en-us/mem/configmgr/develop/core/understand/sqlviews/inventory-views-configuration-manager) | General inventory information |
+| Hardware Inventory Views | [hardware-inventory-views-configuration-manager](https://learn.microsoft.com/en-us/mem/configmgr/develop/core/understand/sqlviews/hardware-inventory-views-configuration-manager) | Hardware inventory data (v_GS_* views) |
+| Software Inventory Views | [software-inventory-views-configuration-manager](https://learn.microsoft.com/en-us/mem/configmgr/develop/core/understand/sqlviews/software-inventory-views-configuration-manager) | Software inventory and file collection |
+| Collection Views | [collection-views-configuration-manager](https://learn.microsoft.com/en-us/mem/configmgr/develop/core/understand/sqlviews/collection-views-configuration-manager) | Collections, membership rules, and members |
+| Application Management Views | [application-management-views-configuration-manager](https://learn.microsoft.com/en-us/mem/configmgr/develop/core/understand/sqlviews/application-management-views-configuration-manager) | Applications, packages, programs, deployments |
+| Software Updates Views | [software-updates-views-configuration-manager](https://learn.microsoft.com/en-us/mem/configmgr/develop/core/understand/sqlviews/software-updates-views-configuration-manager) | Software updates metadata, groups, compliance |
+| Software Metering Views | [software-metering-views-configuration-manager](https://learn.microsoft.com/en-us/mem/configmgr/develop/core/understand/sqlviews/software-metering-views-configuration-manager) | Software usage metering rules and data |
+| Content Management Views | [content-management-views-configuration-manager](https://learn.microsoft.com/en-us/mem/configmgr/develop/core/understand/sqlviews/content-management-views-configuration-manager) | Content distribution and distribution points |
+| Compliance Settings Views | [compliance-settings-views-configuration-manager](https://learn.microsoft.com/en-us/mem/configmgr/develop/core/understand/sqlviews/compliance-settings-views-configuration-manager) | Configuration items, baselines, compliance |
+| Operating System Deployment Views | [operating-system-deployment-views-configuration-manager](https://learn.microsoft.com/en-us/mem/configmgr/develop/core/understand/sqlviews/operating-system-deployment-views-configuration-manager) | Boot images, OS images, task sequences |
+| Endpoint Protection Views | [endpoint-protection-views-configuration-manager](https://learn.microsoft.com/en-us/mem/configmgr/develop/core/understand/sqlviews/endpoint-protection-views-configuration-manager) | Antimalware status, malware activity |
+| Client Status Views | [client-status-views-configuration-manager](https://learn.microsoft.com/en-us/mem/configmgr/develop/core/understand/sqlviews/client-status-views-configuration-manager) | Client health and deployment status |
+| Status and Alert Views | [status-alert-views-configuration-manager](https://learn.microsoft.com/en-us/mem/configmgr/develop/core/understand/sqlviews/status-alert-views-configuration-manager) | Component, site, and site system status |
+| Site Administration Views | [site-admin-views-configuration-manager](https://learn.microsoft.com/en-us/mem/configmgr/develop/core/understand/sqlviews/site-admin-views-configuration-manager) | Site configuration, boundaries, site systems |
+| Security Views | [security-views-configuration-manager](https://learn.microsoft.com/en-us/mem/configmgr/develop/core/understand/sqlviews/security-views-configuration-manager) | User permissions and role-based access |
+| Query Views | [query-views-configuration-manager](https://learn.microsoft.com/en-us/mem/configmgr/develop/core/understand/sqlviews/query-views-configuration-manager) | Saved queries in the hierarchy |
+| Mobile Device Management Views | [mobile-device-management-views-configuration-manager](https://learn.microsoft.com/en-us/mem/configmgr/develop/core/understand/sqlviews/mobile-device-management-views-configuration-manager) | Mobile device configuration and inventory |
+| Wake On LAN Views | [wake-lan-views-configuration-manager](https://learn.microsoft.com/en-us/mem/configmgr/develop/core/understand/sqlviews/wake-lan-views-configuration-manager) | Wake On LAN enabled objects and clients |
 
 #### Sample Queries by Category
 
 Microsoft provides sample SQL queries for each view category:
-- [Sample queries for discovery](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/sample-queries-discovery-configuration-manager)
-- [Sample queries for hardware inventory](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/sample-queries-hardware-inventory-configuration-manager)
-- [Sample queries for software inventory](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/sample-queries-software-inventory-configuration-manager)
-- [Sample queries for software updates](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/sample-queries-software-updates-configuration-manager)
-- [Sample queries for software metering](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/sample-queries-software-metering-configuration-manager)
-- [Sample queries for compliance settings](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/sample-queries-compliance-settings-configuration-manager)
-- [Sample queries for operating system deployment](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/sample-queries-operating-system-deployment-configuration-manager)
-- [Sample queries for endpoint protection](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/sample-queries-endpoint-protection-configuration-manager)
-- [Sample queries for client status](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/sample-queries-client-status-configuration-manager)
-- [Sample queries for status and alerts](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/sample-queries-status-alerts-configuration-manager)
-- [Sample queries for asset intelligence](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/sample-queries-asset-intelligence-configuration-manager)
-- [Sample queries for Wake On LAN](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/sample-queries-wake-lan-views-configuration-manager)
+- [Sample queries for discovery](https://learn.microsoft.com/en-us/mem/configmgr/develop/core/understand/sqlviews/sample-queries-discovery-configuration-manager)
+- [Sample queries for hardware inventory](https://learn.microsoft.com/en-us/mem/configmgr/develop/core/understand/sqlviews/sample-queries-hardware-inventory-configuration-manager)
+- [Sample queries for software inventory](https://learn.microsoft.com/en-us/mem/configmgr/develop/core/understand/sqlviews/sample-queries-software-inventory-configuration-manager)
+- [Sample queries for software updates](https://learn.microsoft.com/en-us/mem/configmgr/develop/core/understand/sqlviews/sample-queries-software-updates-configuration-manager)
+- [Sample queries for software metering](https://learn.microsoft.com/en-us/mem/configmgr/develop/core/understand/sqlviews/sample-queries-software-metering-configuration-manager)
+- [Sample queries for compliance settings](https://learn.microsoft.com/en-us/mem/configmgr/develop/core/understand/sqlviews/sample-queries-compliance-settings-configuration-manager)
+- [Sample queries for operating system deployment](https://learn.microsoft.com/en-us/mem/configmgr/develop/core/understand/sqlviews/sample-queries-operating-system-deployment-configuration-manager)
+- [Sample queries for endpoint protection](https://learn.microsoft.com/en-us/mem/configmgr/develop/core/understand/sqlviews/sample-queries-endpoint-protection-configuration-manager)
+- [Sample queries for client status](https://learn.microsoft.com/en-us/mem/configmgr/develop/core/understand/sqlviews/sample-queries-client-status-configuration-manager)
+- [Sample queries for status and alerts](https://learn.microsoft.com/en-us/mem/configmgr/develop/core/understand/sqlviews/sample-queries-status-alerts-configuration-manager)
+- [Sample queries for asset intelligence](https://learn.microsoft.com/en-us/mem/configmgr/develop/core/understand/sqlviews/sample-queries-asset-intelligence-configuration-manager)
+- [Sample queries for Wake On LAN](https://learn.microsoft.com/en-us/mem/configmgr/develop/core/understand/sqlviews/sample-queries-wake-lan-views-configuration-manager)
 
 #### Creating Custom Reports
 
 For guidance on building custom SSRS reports using SQL views:
-- [Create custom reports by using SQL Server views](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/create-custom-reports-using-sql-server-views)
+- [Create custom reports by using SQL Server views](https://learn.microsoft.com/en-us/mem/configmgr/develop/core/understand/sqlviews/create-custom-reports-using-sql-server-views)
 
 #### Common SQL Views Quick Reference
 
@@ -503,31 +573,49 @@ For guidance on building custom SSRS reports using SQL views:
 | v_ComponentSummarizer | Component status summary |
 | v_SiteSummary | Site status summary |
 
+## Log Files Reference
+
+**Reference**: [Log files reference](https://learn.microsoft.com/en-us/mem/configmgr/core/plan-design/hierarchy/log-files)
+
+Configuration Manager maintains extensive log files for troubleshooting. Key log file categories:
+
+| Category | Documentation |
+|----------|---------------|
+| Client logs | [Client logs](https://learn.microsoft.com/en-us/mem/configmgr/core/plan-design/hierarchy/log-files#client-logs) |
+| Site server logs | [Site server logs](https://learn.microsoft.com/en-us/mem/configmgr/core/plan-design/hierarchy/log-files#site-server-log-files) |
+| Management point logs | [Management point logs](https://learn.microsoft.com/en-us/mem/configmgr/core/plan-design/hierarchy/log-files#management-point) |
+| Distribution point logs | [Distribution point logs](https://learn.microsoft.com/en-us/mem/configmgr/core/plan-design/hierarchy/log-files#distribution-point) |
+| Software update logs | [Software update logs](https://learn.microsoft.com/en-us/mem/configmgr/core/plan-design/hierarchy/log-files#software-updates) |
+
+Use **CMTrace** to view log files: [CMTrace](https://learn.microsoft.com/en-us/mem/configmgr/core/support/cmtrace)
+
 ## Best Practices Summary
 
-1. **Maintenance**:
+**Reference**: [Best practices for Configuration Manager](https://learn.microsoft.com/en-us/mem/configmgr/core/plan-design/configs/site-and-site-system-prerequisites)
+
+1. **Maintenance** - [Site maintenance](https://learn.microsoft.com/en-us/mem/configmgr/core/servers/manage/maintenance-tasks):
    - Run WSUS cleanup monthly
    - Reindex SUSDB regularly
    - Monitor site component status
-   - Back up site database
+   - Back up site database - [Backup and recovery](https://learn.microsoft.com/en-us/mem/configmgr/core/servers/manage/backup-and-recovery)
 
-2. **Performance**:
+2. **Performance** - [Performance and scale](https://learn.microsoft.com/en-us/mem/configmgr/core/plan-design/configs/site-size-performance-guidelines):
    - Limit collection incremental updates
    - Use appropriate collection evaluation schedules
    - Distribute content before deployments
-   - Use boundary groups effectively
+   - Use boundary groups effectively - [Boundary groups](https://learn.microsoft.com/en-us/mem/configmgr/core/servers/deploy/configure/boundary-groups)
 
-3. **Security**:
-   - Use HTTPS where possible
-   - Implement role-based administration
+3. **Security** - [Security and privacy](https://learn.microsoft.com/en-us/mem/configmgr/core/plan-design/security/security-and-privacy):
+   - Use HTTPS where possible - [Plan for PKI certificates](https://learn.microsoft.com/en-us/mem/configmgr/core/plan-design/security/plan-for-certificates)
+   - Implement role-based administration - [Role-based administration](https://learn.microsoft.com/en-us/mem/configmgr/core/understand/fundamentals-of-role-based-administration)
    - Use least-privilege service accounts
    - Regular security updates for site servers
 
-4. **Deployment**:
+4. **Deployment** - [Deploy content](https://learn.microsoft.com/en-us/mem/configmgr/core/servers/deploy/configure/deploy-and-manage-content):
    - Test in pilot collections first
-   - Use phased deployments for major changes
+   - Use phased deployments for major changes - [Phased deployments](https://learn.microsoft.com/en-us/mem/configmgr/osd/deploy-use/create-phased-deployment-for-task-sequence)
    - Configure maintenance windows
-   - Monitor deployment status
+   - Monitor deployment status - [Monitor deployments](https://learn.microsoft.com/en-us/mem/configmgr/apps/deploy-use/monitor-applications-from-the-console)
 
 ## Additional Resources
 

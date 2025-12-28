@@ -51,12 +51,13 @@ Once installed, Claude Code will automatically use this skill when you ask about
 
 ## Documentation References
 
-This skill includes references to official Microsoft documentation:
+This skill includes **130+ inline reference URLs** to official Microsoft documentation, ensuring accuracy and enabling deep-dives into specific topics. Key reference areas:
 
-- [Configuration Manager Documentation](https://learn.microsoft.com/en-us/intune/configmgr/)
-- [SQL Server Views Reference](https://learn.microsoft.com/en-us/intune/configmgr/develop/core/understand/sqlviews/sql-server-views-configuration-manager) - 20+ view categories with sample queries
-- [PowerShell Reference](https://learn.microsoft.com/en-us/powershell/sccm/overview)
-- [Troubleshooting Guide](https://learn.microsoft.com/en-us/troubleshoot/mem/configmgr/welcome-configuration-manager)
+- [Configuration Manager Documentation](https://learn.microsoft.com/en-us/mem/configmgr/)
+- [SQL Server Views Reference](https://learn.microsoft.com/en-us/mem/configmgr/develop/core/understand/sqlviews/sql-server-views-configuration-manager) - 20+ view categories with sample queries
+- [PowerShell Cmdlet Reference](https://learn.microsoft.com/en-us/powershell/module/configurationmanager/)
+- [Troubleshooting Guide](https://learn.microsoft.com/en-us/troubleshoot/mem/configmgr/)
+- [Log Files Reference](https://learn.microsoft.com/en-us/mem/configmgr/core/plan-design/hierarchy/log-files)
 
 ## Requirements
 
