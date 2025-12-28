@@ -17,6 +17,7 @@ This is a [Claude Code skill](https://docs.anthropic.com/en/docs/claude-code) th
 - **PowerShell Automation** - ConfigurationManager module, bulk operations, scripting
 - **Client Troubleshooting** - Log analysis, health checks, common issue resolution
 - **Reporting & SQL Views** - Comprehensive SQL Server views reference (20+ view categories), CMPivot, custom SSRS reports, compliance reporting
+- **Live Documentation Fetching** - Automatically retrieves current Microsoft documentation for accurate cmdlet syntax, troubleshooting steps, and version-specific features
 
 ## Installation
 
@@ -51,7 +52,19 @@ Once installed, Claude Code will automatically use this skill when you ask about
 
 ## Documentation References
 
-This skill includes **130+ inline reference URLs** to official Microsoft documentation, ensuring accuracy and enabling deep-dives into specific topics. Key reference areas:
+This skill includes **130+ inline reference URLs** to official Microsoft documentation, ensuring accuracy and enabling deep-dives into specific topics.
+
+### Live Documentation Fetching
+
+Claude will automatically fetch live content from Microsoft Learn when you ask about:
+- **PowerShell cmdlets** - Gets current syntax, parameters, and examples
+- **Troubleshooting** - Retrieves latest resolution steps for errors
+- **Version-specific features** - Confirms feature availability in your ConfigMgr version
+- **SQL view schemas** - Fetches accurate column names and join relationships
+
+This ensures responses reflect the most current Microsoft documentation rather than potentially outdated information.
+
+### Key Reference Areas
 
 - [Configuration Manager Documentation](https://learn.microsoft.com/en-us/mem/configmgr/)
 - [SQL Server Views Reference](https://learn.microsoft.com/en-us/mem/configmgr/develop/core/understand/sqlviews/sql-server-views-configuration-manager) - 20+ view categories with sample queries
