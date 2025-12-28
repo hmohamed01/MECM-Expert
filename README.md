@@ -21,22 +21,28 @@ This is a [Claude Code skill](https://docs.anthropic.com/en/docs/claude-code) th
 
 ## Installation
 
-Copy the `SKILL.md` file to your Claude Code skills directory:
+### From .skill package (Recommended)
 
 **macOS/Linux:**
 ```bash
-mkdir -p ~/.claude/skills/mecm-expert
-```
-```bash
-cp SKILL.md ~/.claude/skills/mecm-expert/SKILL.md
+unzip mecm-expert.skill -d ~/.claude/skills/mecm-expert
 ```
 
 **Windows (PowerShell):**
 ```powershell
-New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.claude\skills\mecm-expert"
+Expand-Archive mecm-expert.skill -DestinationPath "$env:USERPROFILE\.claude\skills\mecm-expert"
 ```
+
+### From source
+
+**macOS/Linux:**
+```bash
+mkdir -p ~/.claude/skills/mecm-expert && cp SKILL.md ~/.claude/skills/mecm-expert/
+```
+
+**Windows (PowerShell):**
 ```powershell
-Copy-Item SKILL.md "$env:USERPROFILE\.claude\skills\mecm-expert\SKILL.md"
+mkdir "$env:USERPROFILE\.claude\skills\mecm-expert" -Force; cp SKILL.md "$env:USERPROFILE\.claude\skills\mecm-expert\"
 ```
 
 ## Usage
