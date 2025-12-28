@@ -23,6 +23,61 @@ Always reference official Microsoft documentation for the most current and accur
 | Troubleshooting | [Troubleshoot docs](https://learn.microsoft.com/en-us/troubleshoot/mem/configmgr/) |
 | What's New | [What's new](https://learn.microsoft.com/en-us/mem/configmgr/core/plan-design/changes/whats-new-incremental-versions) |
 
+## Live Documentation Fetching
+
+**IMPORTANT**: Use the `WebFetch` tool to retrieve live content from reference URLs to ensure accuracy and get the most current information. Microsoft documentation is frequently updated with new features, bug fixes, and best practices.
+
+### When to Fetch Live Documentation
+
+Use WebFetch for the following scenarios:
+
+| Scenario | Action |
+|----------|--------|
+| **PowerShell cmdlet syntax** | Fetch the specific cmdlet page to get exact parameters, examples, and version requirements |
+| **Troubleshooting steps** | Fetch troubleshooting guides for current resolution steps |
+| **Version-specific features** | Fetch What's New pages to confirm feature availability |
+| **Configuration requirements** | Fetch prerequisite and setup pages for current requirements |
+| **SQL view schemas** | Fetch SQL view documentation for accurate column names and joins |
+| **Task sequence steps** | Fetch step documentation for current options and variables |
+| **Error codes** | Fetch troubleshooting docs to find resolution for specific errors |
+
+### How to Fetch Documentation
+
+When a user asks about a specific topic, fetch the relevant reference URL:
+
+```
+Example: User asks about New-CMApplication cmdlet parameters
+→ WebFetch: https://learn.microsoft.com/en-us/powershell/module/configurationmanager/new-cmapplication
+→ Extract: Parameters, syntax, examples, version requirements
+```
+
+```
+Example: User asks about task sequence failing with error 0x80070002
+→ WebFetch: https://learn.microsoft.com/en-us/troubleshoot/mem/configmgr/os-deployment/task-sequence-fails-error-80070002
+→ Extract: Cause, resolution steps, prevention
+```
+
+### Priority URLs for Common Queries
+
+| Query Type | Fetch URL Pattern |
+|------------|-------------------|
+| PowerShell cmdlet help | `https://learn.microsoft.com/en-us/powershell/module/configurationmanager/{cmdlet-name}` |
+| Task sequence step | `https://learn.microsoft.com/en-us/mem/configmgr/osd/understand/task-sequence-steps` |
+| Client troubleshooting | `https://learn.microsoft.com/en-us/troubleshoot/mem/configmgr/` |
+| Software updates issue | `https://learn.microsoft.com/en-us/troubleshoot/mem/configmgr/update-management/` |
+| Application deployment | `https://learn.microsoft.com/en-us/mem/configmgr/apps/deploy-use/` |
+| SQL view reference | `https://learn.microsoft.com/en-us/mem/configmgr/develop/core/understand/sqlviews/` |
+| Log file reference | `https://learn.microsoft.com/en-us/mem/configmgr/core/plan-design/hierarchy/log-files` |
+| Current version features | `https://learn.microsoft.com/en-us/mem/configmgr/core/plan-design/changes/whats-new-incremental-versions` |
+
+### Fetch Guidelines
+
+1. **Always fetch for cmdlet syntax**: PowerShell cmdlet parameters change between versions - fetch live docs for accurate syntax
+2. **Fetch for troubleshooting**: Resolution steps may be updated - get the latest guidance
+3. **Verify version requirements**: Before recommending a feature, fetch to confirm which ConfigMgr version supports it
+4. **Cross-reference error codes**: Fetch specific error code documentation when users report failures
+5. **Cache awareness**: If you've recently fetched a URL in the same session, you may not need to re-fetch
+
 ## Core Concepts
 
 ### Configuration Manager Hierarchy
