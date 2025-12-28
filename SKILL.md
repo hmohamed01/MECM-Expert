@@ -52,8 +52,8 @@ Example: User asks about New-CMApplication cmdlet parameters
 ```
 
 ```
-Example: User asks about task sequence failing with error 0x80070002
-→ WebFetch: https://learn.microsoft.com/en-us/troubleshoot/mem/configmgr/os-deployment/task-sequence-fails-error-80070002
+Example: User asks about task sequence Install Application step failing
+→ WebFetch: https://learn.microsoft.com/en-us/troubleshoot/mem/configmgr/os-deployment/troubleshoot-install-application-step
 → Extract: Cause, resolution steps, prevention
 ```
 
@@ -450,7 +450,7 @@ Add-CMTaskSequenceStep -TaskSequence $ts -Step $step
 
 ## Client Troubleshooting
 
-**Reference**: [Client troubleshooting overview](https://learn.microsoft.com/en-us/troubleshoot/mem/configmgr/client-management/client-management-overview)
+**Reference**: [Monitor clients](https://learn.microsoft.com/en-us/mem/configmgr/core/clients/manage/monitor-clients)
 
 ### Client Health Checks
 
@@ -480,21 +480,21 @@ Location: `C:\Windows\CCM\CcmEval.xml`
 
 ### Common Issues and Resolution
 
-**Reference**: [Client troubleshooting guidance](https://learn.microsoft.com/en-us/troubleshoot/mem/configmgr/client-management/client-management-overview)
+**Reference**: [Configuration Manager troubleshooting](https://learn.microsoft.com/en-us/troubleshoot/mem/configmgr/welcome-configuration-manager)
 
-**Client Not Reporting** - [Troubleshoot client installation](https://learn.microsoft.com/en-us/troubleshoot/mem/configmgr/client-installation/troubleshoot-client-install):
+**Client Not Reporting** - [Client installation properties](https://learn.microsoft.com/en-us/mem/configmgr/core/clients/deploy/about-client-installation-properties):
 1. Verify CcmExec service is running
 2. Check ClientIDManagerStartup.log for registration errors
 3. Verify network connectivity to MP
 4. Check certificates if using HTTPS
 
-**Content Download Failures** - [Troubleshoot content download](https://learn.microsoft.com/en-us/troubleshoot/mem/configmgr/content-management/troubleshoot-content-download):
+**Content Download Failures** - [Troubleshoot content distribution](https://learn.microsoft.com/en-us/troubleshoot/mem/configmgr/content-management/troubleshoot-content-distribution):
 1. Check CAS.log and ContentTransferManager.log
 2. Verify DP availability
 3. Check boundary configuration - [Configure boundaries](https://learn.microsoft.com/en-us/mem/configmgr/core/servers/deploy/configure/define-site-boundaries-and-boundary-groups)
 4. Verify client cache size
 
-**Policy Not Updating** - [Troubleshoot policy processing](https://learn.microsoft.com/en-us/troubleshoot/mem/configmgr/client-management/client-policy-processing-overview):
+**Policy Not Updating** - [Clients don't receive policy data](https://learn.microsoft.com/en-us/troubleshoot/mem/configmgr/client-management/clients-not-receive-policy-data):
 1. Run Machine Policy Retrieval cycle
 2. Check PolicyAgent.log
 3. Verify MP health
