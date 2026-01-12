@@ -1,5 +1,9 @@
 # MECM Expert
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Platform](https://img.shields.io/badge/Platform-Windows%20Server-blue.svg)](https://www.microsoft.com/windows-server)
+[![Claude Code](https://img.shields.io/badge/Claude%20Code-Skill-blueviolet.svg)](https://claude.ai/code)
+
 A Claude Code skill that provides comprehensive Microsoft Endpoint Configuration Manager (MECM/ConfigMgr/SCCM) administration expertise.
 
 > **Note:** This skill works with both **Claude Code CLI** and **claude.ai**. For claude.ai, simply zip this repository and upload it as a skill in the capabilities section of your settings.
