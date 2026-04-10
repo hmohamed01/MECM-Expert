@@ -57,6 +57,7 @@ Load the appropriate reference file based on the user's topic:
 | PowerShell automation | [powershell.md](references/powershell.md) | Module setup, common cmdlets, client actions |
 | Client issues and log files | [troubleshooting.md](references/troubleshooting.md) | Client health, common issues, log file reference |
 | SSRS reports, SQL views, CMPivot | [reporting-sql.md](references/reporting-sql.md) | Built-in reports, SQL view categories, sample queries |
+| SQL Server tuning for MECM | [sql-best-practices.md](references/sql-best-practices.md) | MaxDOP, memory, tempdb, maintenance plans, RCSI, AG, diagnostics |
 
 ## Scripts
 
