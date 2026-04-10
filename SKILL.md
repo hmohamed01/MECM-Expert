@@ -61,9 +61,14 @@ Load the appropriate reference file based on the user's topic:
 
 ## Scripts
 
+All scripts write CMTrace-compatible logs. Open the resulting `.log` files with CMTrace for color-coded filtering.
+
 | Script | Purpose |
 |--------|---------|
 | [Import-CMModule.ps1](scripts/Import-CMModule.ps1) | Fault-tolerant ConfigurationManager module loader. Use: `. .\scripts\Import-CMModule.ps1 -SiteCode "PS1"` |
+| [Invoke-CMClientHealthCheck.ps1](scripts/Invoke-CMClientHealthCheck.ps1) | Read-only health check for a ConfigMgr client. Validates services, WMI, policy, inventory, cache, MP connectivity, disk, pending reboot. Log: `C:\Windows\CCM\Logs\ClientHealthCheck.log` |
+| [Repair-WMISafely.ps1](scripts/Repair-WMISafely.ps1) | Non-destructive WMI repair. Uses `winmgmt /salvagerepository` (NOT `/resetrepository`), re-registers WMI DLLs, recompiles critical MOFs. Log: `C:\Windows\Logs\WMIRepair.log` |
+| [Invoke-CMServerHealthCheck.ps1](scripts/Invoke-CMServerHealthCheck.ps1) | Read-only health check for a ConfigMgr site server. Validates SMS services, SMS Provider, site component status, inbox backlogs, disk space, SQL connectivity, recent event log errors. Log: `C:\Windows\Logs\CMServerHealthCheck.log` |
 
 ## Core Concepts
 

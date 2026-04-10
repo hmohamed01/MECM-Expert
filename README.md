@@ -21,7 +21,35 @@ This is a [Claude Code skill](https://docs.anthropic.com/en/docs/claude-code) th
 - **PowerShell Automation** - ConfigurationManager module, bulk operations, scripting
 - **Client Troubleshooting** - Log analysis, health checks, common issue resolution
 - **Reporting & SQL Views** - Comprehensive SQL Server views reference (20+ view categories), CMPivot, custom SSRS reports, compliance reporting
+- **SQL Server Best Practices** - MaxDOP, memory, tempdb, maintenance plans, RCSI, Always On AG tuning for MECM
 - **Live Documentation Fetching** - Automatically retrieves current Microsoft documentation for accurate cmdlet syntax, troubleshooting steps, and version-specific features
+- **Bundled PowerShell Scripts** - Ready-to-run health check and safe WMI repair scripts with CMTrace-compatible logging
+
+## Bundled Scripts
+
+Production-ready PowerShell scripts in the `scripts/` directory. All scripts generate CMTrace-compatible log files for color-coded review in CMTrace.
+
+| Script | Purpose | Default Log |
+|--------|---------|-------------|
+| `Import-CMModule.ps1` | Fault-tolerant loader for the ConfigurationManager PowerShell module | — |
+| `Invoke-CMClientHealthCheck.ps1` | Read-only ConfigMgr client health check: services, WMI, policy, inventory, cache, MP connectivity, disk, pending reboot | `C:\Windows\CCM\Logs\ClientHealthCheck.log` |
+| `Repair-WMISafely.ps1` | **Non-destructive** WMI repair (uses `/salvagerepository`, not `/resetrepository`), re-registers WMI DLLs, recompiles MOFs | `C:\Windows\Logs\WMIRepair.log` |
+| `Invoke-CMServerHealthCheck.ps1` | Read-only site server health check: SMS services, SMS Provider, component status, inbox backlogs, disk space, SQL connectivity, event log errors | `C:\Windows\Logs\CMServerHealthCheck.log` |
+
+### Script Usage Examples
+
+```powershell
+# Client health check (run on a client)
+.\scripts\Invoke-CMClientHealthCheck.ps1
+
+# Safe WMI repair (run as Administrator)
+.\scripts\Repair-WMISafely.ps1
+
+# Server health check (run on the site server)
+.\scripts\Invoke-CMServerHealthCheck.ps1 -SiteCode "PS1"
+```
+
+> **WMI repair safety note:** `Repair-WMISafely.ps1` deliberately avoids `winmgmt /resetrepository`, which rebuilds the WMI repository from scratch and breaks ConfigMgr, SCOM, and other WMI-dependent agents. Use a full rebuild only as a last resort.
 
 ## Installation
 
